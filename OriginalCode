@@ -1,0 +1,160 @@
+from random import randint
+
+weapons = ['1', '2', '3']
+wins = 0
+games = 0
+
+def main():
+    displayRules()
+    
+    MMnum = False
+    while MMnum == False:
+        MMnum = eval(input('Input the number for the gamemode/rules here: '))
+        if MMnum == 1:
+            print('Paper Covers Rock.')
+            print('Rock Smashed Scissors.')
+            print('Scissors Cut Paper.')
+            MMnum = False
+        elif MMnum == 2:
+            CompGame(wins, games)
+            
+        elif MMnum == 3:
+            TwoPlayer()
+            
+        elif MMnum == 4:
+            doneScore(wins, games)
+        else:
+            print('Please use a number between 1 and 4.')
+
+def CompGame(wins, games):
+    print('What is your weapon of choice?')
+    print('1. Rock')
+    print('2. Paper')
+    print('3. Sicssor')
+    computer = weapons[randint(0,2)]
+    WeaponPlayer = False
+    while WeaponPlayer == False:
+        WeaponPlayer = str(input('Input the number choice for the weapon here: '))
+        print('')
+        if WeaponPlayer == computer:
+            print('Tie.\n')
+            return main() 
+        elif WeaponPlayer == '1':
+            if computer == '2':
+                print('You choose Rock.')
+                print('Computer choose Paper.')
+                print('You Lost.\n')
+                games += 1
+                return games
+            else:
+                print('You choose Rock.')
+                print('Computer choose Scissors.')
+                print('You Won!!!\n')
+                games += 1
+                wins += 1
+                return wins and games
+        elif WeaponPlayer == '2':
+            if computer == '3':
+                print('You choose Paper.')
+                print('Computer choose Scissors.')
+                print('You Lost.\n')
+                games += 1
+                return games
+            else:
+                print('You choose Paper.')
+                print('computer choose Rock.')
+                print('You Win!!!\n')
+                games += 1
+                wins += 1
+                return wins and games
+        elif WeaponPlayer == '3':
+            if computer == '1':
+                print('You choose Scissors.')
+                print('Comptuer choose Rock.')
+                print('You Lost.\n')
+                games += 1
+                return games
+            else:
+                print('You choose Scissors.')
+                print('Comptuer choose Paper.')
+                print('You Win!!!\n')
+                games += 1
+                wins += 1
+                return wins and games
+        else:
+            print('Please choose 1-3\n')
+            return main()
+        WeaponPlayer = False
+        computer = weapons[randint(0,2)]
+    
+
+def TwoPlayer():
+    print('What is your weapon of choice?')
+    print('1. Rock')
+    print('2. Paper')
+    print('3. Sicssor')
+    game = False
+    while game == False:
+        ply1 = str(input('Player 1 choose what number weapon you want: '))
+        ply2 = str(input('Player 2 choose what number weapon you want: '))
+        print('')
+        if ply1 == ply2:
+            print('Tie.\n')
+            return again() 
+        elif ply1 == '1':
+            if ply2 == '2':
+                print('Player 1 choose Rock.')
+                print('Player 2 choose Paper.')
+                print('Player 2 Won!!!\n')
+                return again()
+            else:
+                print('Player 1 choose Rock.')
+                print('Player 2 choose Scissors.')
+                print('Player 1 Won!!!\n')
+                return again()
+        elif ply1 == '2':
+            if ply2 == '3':
+                print('Player 1 choose Paper.')
+                print('Player 2 choose Scissors.')
+                print('Player 2 Won!!!\n')
+                return again()
+            else:
+                print('Player 1 choose Paper.')
+                print('Player 2 choose Rock.')
+                print('Player 1 Won!!!\n')
+                return again()
+        elif ply1 == '3':
+            if ply2 == '1':
+                print('Player 1 choose Scissors.')
+                print('Player 2 choose Rock.')
+                print('Player 2 Won!!!\n')
+                return again()
+            else:
+                print('Player 1 choose Scissors.')
+                print('Player 2 choose Paper.')
+                print('Player 1 Won!!!\n')
+                return again()
+        else:
+            print('Please choose 1-3\n')
+            return again()
+        game = False
+
+def again():
+    plyAgain = input('Wanna play again? y or n: ').lower()
+    if plyAgain == 'y':
+        main()
+    elif plyAgain =='n':
+        print('Good Bye!')
+        
+def doneScore(wins, games):
+    print(wins)
+    print(games)
+
+def displayRules():
+    print('Welcome to rock paper scissors!\n')
+    print('1. See Rules.')
+    print('2. Play against the computer.')
+    print('3. Play a two player game.')
+    print('4. Quit.\n')
+
+main()
